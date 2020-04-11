@@ -19,9 +19,9 @@ const defaultComment = {
 const locales = {
     'zh-cn': {
         head: {
-            nick: '昵称',
-            mail: '邮箱',
-            link: '网址(http://)',
+            nick: '昵称(必填)',
+            mail: '邮箱(必填)',
+            link: '网址(https://)',
         },
         tips: {
             comments: '评论',
@@ -140,7 +140,9 @@ ValineFactory.prototype._init = function(){
             path = location.pathname,
             pageSize,
             recordIP,
-            clazzName = 'Comment'
+            clazzName = 'Comment',
+            master,
+            friends
         } = root.config;
         root['config']['path'] = path.replace(/index\.html?$/, '');
         root['config']['clazzName'] = clazzName;
@@ -509,7 +511,7 @@ ValineFactory.prototype.bind = function (option) {
                 _i.innerHTML = val;
                 _vemojis.appendChild(_i);
                 Utils.on('click', _i, (e) => {
-                    _insertAtCaret(_veditor, val)
+                    _insertAtCaret(_veditor, val.includes('<img')?`!${name}(${val.match(/src="(.*?)"/)[1]})`:val)
                     syncContentEvt(_veditor)
                 });
             })(key, emojiData[key])
@@ -717,19 +719,31 @@ ValineFactory.prototype.bind = function (option) {
             'class': 'vcard',
             'id': rt.id
         });
-        let _img = _avatarSetting['hide'] ? '' : `<img class="vimg" src="${_avatarSetting['cdn']+md5(rt.get('mail'))+_avatarSetting['params']}">`;
+        let imgUrl=_avatarSetting['cdn']+md5(rt.get('mail'))+_avatarSetting['params'];
+        if(rt.get("mail").includes("@qq.com")){
+            let prefix=rt.get("mail").replace(/@.*/,"");
+            let pattern=/^\d+$/g;
+            let result=prefix.match(/^\d+$/g);
+            if(result!==null){
+                imgUrl="https://cors-anywhere.herokuapp.com/q1.qlogo.cn/g?b=qq&nk="+prefix+"&s=100"
+            }
+        }
+        let _img = _avatarSetting['hide'] ? '' : `<img class="vimg" src="${imgUrl}" crossorigin="Anonymous">`;
         let ua = rt.get('ua') || '';
         let uaMeta = '';
         if (ua) {
             ua = detect(ua);
-            let browser = `<span class="vsys">${ua.browser} ${ua.version}</span>`;
-            let os = `<span class="vsys">${ua.os} ${ua.osVersion}</span>`;
+            let browser = `<span class="vsys"><i class="fab fa-${["xiaomi"].includes(ua.browser.toLowerCase())?"mobile-alt fas":ua.browser.toLowerCase()}"></i>${ua.browser} ${ua.version}</span>`;
+            let os = `<span class="vsys"><i class="fab fa-${['mac os','ios'].includes(ua.os.toLowerCase())?"apple":ua.os.toLowerCase()}"></i>${ua.os} ${ua.osVersion}</span>`;
             uaMeta = `${browser} ${os}`;
         }
         if(root.config.path === '*') uaMeta = `<a href="${rt.get('url')}" class="vsys">${rt.get('url')}</a>`
+        let master = md5(rt.get("mail")) === root.config.master;
+        let friend = root.config.friends.includes(md5(rt.get("mail").toLowerCase()));
+        let spanm = master ? `<span class="vtag vmaster">博主</span>`:friend?`<span class="vtag vfriend">小伙伴</span>`:`<span class="vtag vvisitor">访客</span>`;
         let _nick = '';
         let _t = rt.get('link')?(/^https?\:\/\//.test(rt.get('link')) ? rt.get('link') : 'http://'+rt.get('link')) : '';
-        _nick = _t ? `<a class="vnick" rel="nofollow" href="${_t}" target="_blank" >${rt.get("nick")}</a>` : `<span class="vnick">${rt.get('nick')}</span>`;
+        _nick = _t ? `<a class="vnick" rel="nofollow" href="${_t}" target="_blank" >${rt.get("nick")}</a>${spanm}` : `<span class="vnick">${rt.get('nick')}</span>${spanm}`;
         _vcard.innerHTML = `${_img}
             <div class="vh" rootid=${rt.get('rid') || rt.id}>
                 <div class="vhead">${_nick} ${uaMeta}</div>
@@ -845,6 +859,10 @@ ValineFactory.prototype.bind = function (option) {
         }
         if (defaultComment['comment'] == '') {
             inputs['comment'].focus();
+            return;
+        }
+        if (!/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(defaultComment['mail'])) {
+            inputs['mail'].focus();
             return;
         }
         defaultComment['nick'] = defaultComment['nick'] || 'Anonymous';

@@ -339,13 +339,32 @@
                     position:relative;
                     font-size: .875em;
                     font-weight: 500;
-                    margin-right: .875em;
+                    margin-right: .400em;
                     cursor: pointer;
                     color: #1abc9c;
                     text-decoration:none;
                     display:inline-block;
                     &:hover {
                         color: #D7191A;
+                    }
+                }
+                .vtag {
+                    font-size: 12px;
+                    display: inline-block;
+                    line-height: 20px;
+                    border-radius: 2px;
+                    color: #fff;
+                    padding: 0 5px;
+                    position: inherit;
+                    margin-right: .400rem;
+                    &.vmaster {
+                        background: #ffa51e;
+                    }
+                    &.vfriend {
+                        background: #66ccff;
+                    }
+                    &.vvisitor {
+                        background: #828282;
                     }
                 }
                 .vsys {
