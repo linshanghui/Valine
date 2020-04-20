@@ -738,7 +738,7 @@ ValineFactory.prototype.bind = function (option) {
             uaMeta = `${browser} ${os}`;
         }
         if(root.config.path === '*') uaMeta = `<a href="${rt.get('url')}" class="vsys">${rt.get('url')}</a>`
-        let master = md5(rt.get("mail")) === root.config.master;
+        let master = root.config.master.includes(md5(rt.get("mail")));
         let friend = root.config.friends.includes(md5(rt.get("mail").toLowerCase()));
         let spanm = master ? `<span class="vtag vmaster">博主</span>`:friend?`<span class="vtag vfriend">小伙伴</span>`:`<span class="vtag vvisitor">访客</span>`;
         let _nick = '';
