@@ -12,6 +12,18 @@
 ------------------------------
 **[View Documentation](https://valine.js.org)**
 
+## 比原版新增
+- `博主`，`小伙伴`，`访客`标签
+- 邮箱检测更严格
+
+## 新增参数
+
+| 参数 | 类型 | 说明 | 默认 |
+| :-----: | :-----: | :-----: | :-----: |
+| tagMeta | Array | 标签要显示的文字 | ["博主","小伙伴","访客"] |
+| master | Array/String | md5加密后的博主邮箱 | [] |
+| friends | Array | md5加密后的小伙伴邮箱 | [] |
+
 ## Features
 - High speed.
 - Safe by default.
