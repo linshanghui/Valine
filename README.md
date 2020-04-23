@@ -15,14 +15,17 @@
 ## 比原版新增
 - `博主`，`小伙伴`，`访客`标签
 - 邮箱检测更严格
+- QQ邮箱识别
+- `meta placeholder`可自定义
 
 ## 新增参数
 
-| 参数 | 类型 | 说明 | 默认 |
-| :-----: | :-----: | :-----: | :-----: |
-| tagMeta | Array | 标签要显示的文字 | ["博主","小伙伴","访客"] |
-| master | Array/String | md5加密后的博主邮箱 | [] |
-| friends | Array | md5加密后的小伙伴邮箱 | [] |
+| 参数 | 类型 | 说明 | 默认 | 示例 |
+| :-----: | :-----: | :-----: | :-----: | :-----: |
+| tagMeta | Array | 标签要显示的文字 | ["博主","小伙伴","访客"] | ["博主","小伙伴","访客"] |
+| master | Array/String | md5加密后的博主邮箱 | [] | ["fe01ce2a7fbac8fafaed7c982a04e229"] |
+| friends | Array | md5加密后的小伙伴邮箱 | [] | ["fe01ce2a7fbac8fafaed7c982a04e229"] |
+| metaPlaceholder | Object | meta placeholder内容 | {} | {"nick":"昵称/QQ号","mail":"邮箱(必填)"} |
 
 ## Features
 - High speed.
