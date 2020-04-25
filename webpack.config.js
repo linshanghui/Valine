@@ -57,8 +57,8 @@ module.exports = env => {
     }
     return {
         entry: {
-            Valine: ['./src/index.scss', './src/index.js'],
-            'Valine.Pure': './src/index.js'
+            weiyu: ['./src/index.scss', './src/index.js'],
+            //'Valine.Pure': './src/index.js'
             //'Valine.locales': './src/Valine.locales.js',
             // detect: './src/utils/detect.js',
             // escape: './src/utils/escape.js'
