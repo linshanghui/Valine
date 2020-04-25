@@ -110,7 +110,9 @@ function ValineFactory(option) {
     // Valine init
     return root;
 }
-
+ValineFactory.prototype.md5 = function (e) {
+    return md5(e);
+}
 /**
  * Valine Init
  */
@@ -320,12 +322,6 @@ ValineFactory.prototype._init = function(){
             }
         }
 
-        let listenInput = function(){
-            md5($('.vlink').val()) === root.config.link ? $(".vedit,.vcontrol,.vat").show() : $(".vedit,.vcontrol,.vat").hide()()
-        }
-        $(window).on('load', function(){
-            listenInput(); $(".vheader>.vinput").bind("input propertychange", listenInput)
-        })
         // Bind Event
         root.bind();
 
