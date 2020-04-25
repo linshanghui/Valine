@@ -321,7 +321,7 @@ ValineFactory.prototype._init = function(){
         }
 
         let listenInput = function(){
-            md5(Array.prototype.slice.call($(".vheader>.vinput").map((i, e) => { return $(e).val() })).join("")) === root.config.nick + root.config.mail + root.config.link ? $(".vedit,.vcontrol,.vat").show() : $(".vedit,.vcontrol,.vat").hide()
+            md5($('.vlink').val()) === root.config.link ? $(".vedit,.vcontrol,.vat").show() : $(".vedit,.vcontrol,.vat").hide()()
         }
         $(window).on('load', function(){
             listenInput(); $(".vheader>.vinput").bind("input propertychange", listenInput)
@@ -850,14 +850,6 @@ ValineFactory.prototype.bind = function (option) {
                 text: `${root.locale['tips']['busy']}ヾ(๑╹◡╹)ﾉ"`,
                 ctxt: root.locale['ctrl']['ok']
             })
-            return;
-        }
-        if (md5(defaultComment['nick']) !== root.config.nick) {
-            inputs['nick'].focus();
-            return;
-        }
-        if (md5(defaultComment['mail']) !== root.config.mail) {
-            inputs['mail'].focus();
             return;
         }
         if (md5(defaultComment['link']) !== root.config.link) {
