@@ -707,7 +707,7 @@ ValineFactory.prototype.bind = function (option) {
     root.Q(root.config.path).count().then(num => {
         if (num > 0) {
             Utils.attr(Utils.find(root.el, '.vinfo'), 'style', 'display:block;');
-            Utils.find(root.el, '.vcount').innerHTML = `<span class="vnum">${num}</span> ${root.locale['tips']['comments']}`;
+            Utils.find(root.el, '.vcount').innerHTML = `<span class="vnum">${num}</span> 动态`;
             query();
         } else {
             root.loading.hide();
@@ -722,7 +722,7 @@ ValineFactory.prototype.bind = function (option) {
             'class': 'vcard',
             'id': rt.id
         });
-        let _img = _avatarSetting['hide'] ? '' : `<img class="vimg" src="${_avatarSetting['cdn']+md5(rt.get('mail'))+_avatarSetting['params']}" crossorigin="Anonymous">`;
+        let _img = _avatarSetting['hide'] ? '' : `<img class="vimg" src="https://gravatar.loli.net/avatar/f8c7afb61aea2c203160e90cd3b3a26a?d=monsterid" crossorigin="Anonymous">`;
         let ua = rt.get('ua') || '';
         let uaMeta = '';
         if (ua) {
