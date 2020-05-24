@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1">
     <title>Valine - A simple comment system based on Leancloud.</title>
     <style>
-        * {
+    * {
             margin: 0 auto;
             padding: 0;
             box-sizing: border-box;
@@ -126,6 +126,8 @@
 </head>
 
 <body>
+    
+  </div>
     <div class="market"></div>
     <header>
         <div class="container">
@@ -150,6 +152,7 @@
         var valine = new Valine();
         valine.init({
             el: '.comment',
+            verify: true,
             app_id: '3GiiCyXCrGbOIH3EelCfJ6yw-gzGzoHsz',
             app_key: 'iuneD4hXPQImdHQSRE0aOcRF',
             placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',

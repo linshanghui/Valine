@@ -27,6 +27,7 @@
 | master | Array/String | md5加密后的博主邮箱 | [] | ["fe01ce2a7fbac8fafaed7c982a04e229"] |
 | friends | Array | md5加密后的小伙伴邮箱 | [] | ["fe01ce2a7fbac8fafaed7c982a04e229"] |
 | metaPlaceholder | Object | meta placeholder内容 | {} | {"nick":"昵称/QQ号","mail":"邮箱(必填)"} |
+| verify | Boolean | 评论时是否需要验证 | false | true |
 
 ## Features
 - High speed.
